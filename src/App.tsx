@@ -1,8 +1,9 @@
 import { FormEvent, useState } from 'react'
 import './App.css'
+import Display from './Components/Display';
 import Form from './Components/Form';
-import Map from './Components/Map';
-import {IFormData,IYelpBusiness} from './utils/utils'
+
+import {IFormData,IYelpBusiness} from './utils/global'
 
 
 function App() {
@@ -18,13 +19,7 @@ function App() {
               
       <Form onFormSubmit={handleFormSubmit} />
       {yelpData && (
-        <div>
-          <h2>Submitted Data:</h2>
-
-          <pre>{JSON.stringify(yelpData, null, 2)}</pre>
-          <h1> Congrats you're going to {yelpData.name}</h1>
-          <Map longitude={yelpData.coordinates.longitude} latitude={yelpData.coordinates.latitude} zoom={15}></Map>
-        </div>
+       <Display name={yelpData.name} price={yelpData.price} image_url={yelpData.image_url} latitude={yelpData.coordinates.latitude} longitude={yelpData.coordinates.longitude} ></Display>
       )}
     </div>
   );

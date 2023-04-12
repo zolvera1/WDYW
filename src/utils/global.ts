@@ -1,3 +1,17 @@
+import {createGlobalStyle} from "styled-components"
+
+export default createGlobalStyle`
+   *{
+       margin: 0;
+       padding: 0;
+       outline:0;
+       box-sizing:border-box;
+       font-family: 'Open Sans', sans-serif; 
+   }
+   #root{
+    margin:0 auto;
+}
+`
 export interface IState {
     id: number;
     name: string;
@@ -9,7 +23,6 @@ export interface IState {
     $$: 2,
     $$$: 3,
     $$$$: 4,
-    $$$$$: 5
   };
   export const usStates: IState[] = [
     { id: 0, name: 'Alabama', abbreviation: 'AL' },
@@ -76,12 +89,19 @@ export interface IState {
     export interface IYelpBusiness {
       id: string;
       name: string;
-      rating: number;
+      image_url: string;
+      is_closed: boolean;
+      url: string;
       review_count: number;
-      price?: string;
-      phone?: string;
-      display_phone?: string;
-      photos?: string[];
+      categories: {
+        alias: string;
+        title: string;
+      }[];
+      rating: number;
+      coordinates: {
+        latitude: number;
+        longitude: number;
+      };
       location: {
         address1: string;
         address2?: string;
@@ -91,19 +111,11 @@ export interface IState {
         country: string;
         state: string;
         display_address: string[];
-        cross_streets?: string;
       };
-      coordinates: {
-        latitude: number;
-        longitude: number;
-      };
+      phone: string;
+      display_phone: string;
       distance: number;
-      categories: {
-        alias: string;
-        title: string;
-      }[];
-      url: string;
-      is_closed: boolean;
+      price:string;
     }
     
     

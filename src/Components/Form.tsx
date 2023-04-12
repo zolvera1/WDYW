@@ -15,7 +15,7 @@ import {
   CircularProgress,
   Grid,
 } from '@mui/material';
-import { usStates, IState, dollarValues, IFormData, IYelpBusiness } from '../utils/utils';
+import { usStates, IState, dollarValues, IFormData, IYelpBusiness } from '../utils/global';
 
 type FormProps = {
   onFormSubmit: (data: IYelpBusiness) => void;
@@ -34,7 +34,7 @@ const Form = ({ onFormSubmit }: FormProps) => {
     formState: { errors, isSubmitting },
   } = useForm<IFormData>({
     defaultValues: {
-      state: 'AL',
+      state: '',
       address: '',
       city:'',
       radius: 0,
@@ -47,9 +47,9 @@ const Form = ({ onFormSubmit }: FormProps) => {
   const onSubmit = async (formData: IFormData) => {
     try {
       const { data, status } = await axios.post<IYelpBusiness>('http://localhost:3001/api', formData, { headers: headers });
-      console.log(data);
+  
       onFormSubmit(data);
-      console.log(status);
+
     }
     catch (e: any) {
       console.log(e.message);
@@ -58,27 +58,47 @@ const Form = ({ onFormSubmit }: FormProps) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={4}>
-          <FormControl fullWidth error={!!errors.address}>
+      <Grid direction="column" container justifyContent="center" spacing={3}>
+      <Grid item xs={12}>
+          <FormControl fullWidth >
+            <FormLabel >Price Range</FormLabel>
+            <FormGroup row>
+              {Object.keys(dollarValues).map((k) => (
+                <FormControlLabel
+                  key={dollarValues[k]}
+                  control={
+                    <Checkbox
+                      {...register("priceRange", { required: true })}
+                      value={dollarValues[k]}
+                    />
+                  }
+                  label={`${k}`}
+                />
+              ))}
+            </FormGroup>
+            {errors.priceRange && <FormHelperText error>This field is required</FormHelperText>}
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6 }>
+          <FormControl fullWidth >
             <TextField
               label="Address"
               {...register("address", { required: true })}
             />
-            {errors.address && <FormHelperText>This field is required</FormHelperText>}
+            {errors.address && <FormHelperText error>This field is required</FormHelperText>}
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={4}>
-          <FormControl fullWidth error={!!errors.city}>
+        <Grid item xs={12} sm={6}>
+          <FormControl fullWidth >
             <TextField
               label="City"
               {...register("city", { required: true })}
             />
-            {errors.city && <FormHelperText>This field is required</FormHelperText>}
+            {errors.city && <FormHelperText error>This field is required</FormHelperText>}
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={4}>
-          <FormControl fullWidth error={!!errors.state}>
+        <Grid item xs={12} sm={6}>
+          <FormControl fullWidth >
             <InputLabel>State</InputLabel>
             <Controller
               defaultValue=''
@@ -93,11 +113,11 @@ const Form = ({ onFormSubmit }: FormProps) => {
                 </Select>
               )}
             />
-            {errors.state && <FormHelperText>This field is required</FormHelperText>}
+            {errors.state && <FormHelperText error>This field is required</FormHelperText>}
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <FormControl fullWidth error={!!errors.radius}>
+          <FormControl fullWidth >
             <TextField
               type="number"
               label="Radius"
@@ -106,27 +126,10 @@ const Form = ({ onFormSubmit }: FormProps) => {
             {errors.radius && <FormHelperText>This field is required</FormHelperText>}
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl fullWidth error={!!errors.priceRange}>
-            <FormLabel component="legend">Price Range</FormLabel>
-            <FormGroup>
-              {Object.keys(dollarValues).map((k) => (
-                <FormControlLabel
-                  key={dollarValues[k]}
-                  control={
-                    <Checkbox
-                      {...register("priceRange", { required: true })}
-                      value={dollarValues[k]}
-                    />
-                  }
-                  label={`${k}`}
-                />
-              ))}
-            </FormGroup>
-            {errors.priceRange && <FormHelperText>This field is required</FormHelperText>}
-          </FormControl>
+        
+        <Grid style={{ textAlign: "center" }} item xs={12} sm={12}>
+        {isSubmitting ? <CircularProgress size={24} /> : <Button variant="contained" type="submit">Go</Button>}
         </Grid>
-        {isSubmitting ? <CircularProgress size={24} /> : <Button type="submit">Submit</Button>}
       </Grid>
     </form>
   )
