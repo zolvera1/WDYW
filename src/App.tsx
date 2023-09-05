@@ -16,7 +16,6 @@ function App() {
 
   return (
     <div className="App">
-              
       <Form onFormSubmit={handleFormSubmit} />
       {yelpData && (
        <Display name={yelpData.name} price={yelpData.price} image_url={yelpData.image_url} latitude={yelpData.coordinates.latitude} longitude={yelpData.coordinates.longitude} ></Display>

@@ -14,6 +14,7 @@ import {
   FormLabel,
   CircularProgress,
   Grid,
+  Paper
 } from '@mui/material';
 import { usStates, IState, dollarValues, IFormData, IYelpBusiness } from '../utils/global';
 
@@ -58,27 +59,9 @@ const Form = ({ onFormSubmit }: FormProps) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <Paper elevation={0} variant="outlined" style={{ padding: '16px', textAlign: 'center' }}>
       <Grid direction="column" container justifyContent="center" spacing={3}>
-      <Grid item xs={12}>
-          <FormControl fullWidth >
-            <FormLabel >Price Range</FormLabel>
-            <FormGroup row>
-              {Object.keys(dollarValues).map((k) => (
-                <FormControlLabel
-                  key={dollarValues[k]}
-                  control={
-                    <Checkbox
-                      {...register("priceRange", { required: true })}
-                      value={dollarValues[k]}
-                    />
-                  }
-                  label={`${k}`}
-                />
-              ))}
-            </FormGroup>
-            {errors.priceRange && <FormHelperText error>This field is required</FormHelperText>}
-          </FormControl>
-        </Grid>
+    
         <Grid item xs={12} sm={6 }>
           <FormControl fullWidth >
             <TextField
@@ -126,11 +109,32 @@ const Form = ({ onFormSubmit }: FormProps) => {
             {errors.radius && <FormHelperText>This field is required</FormHelperText>}
           </FormControl>
         </Grid>
-        
+        <Grid item xs={12} alignSelf="center">
+          <FormControl fullWidth >
+            <FormLabel >Price Range</FormLabel>
+            <FormGroup row>
+              {Object.keys(dollarValues).map((k) => (
+                <FormControlLabel
+                  key={dollarValues[k]}
+                  control={
+                    <Checkbox
+                      {...register("priceRange", { required: true })}
+                      value={dollarValues[k]}
+                    />
+                  }
+                  label={`${k}`}
+                  
+                />
+              ))}
+            </FormGroup>
+            {errors.priceRange && <FormHelperText error>This field is required</FormHelperText>}
+          </FormControl>
+        </Grid>
         <Grid style={{ textAlign: "center" }} item xs={12} sm={12}>
         {isSubmitting ? <CircularProgress size={24} /> : <Button variant="contained" type="submit">Go</Button>}
         </Grid>
       </Grid>
+      </Paper>
     </form>
   )
 }

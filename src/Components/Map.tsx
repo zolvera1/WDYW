@@ -12,9 +12,6 @@ const Map = ({ latitude, longitude, zoom }: MapProps) => {
 
   return (
     <div>
-      <div className="sidebar">
-        Longitude: {longitude} | Latitude: {latitude} | Zoom: {zoom}
-      </div>
       <div ref={mapContainerRef} className="map-container" />
     </div>
   );

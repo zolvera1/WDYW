@@ -18,14 +18,17 @@ const useMap = (latitude: number, longitude: number, zoom: number): MapHookRetur
       style: 'mapbox://styles/mapbox/streets-v12',
       center: [longitude, latitude],
       zoom,
+      
     });
     const newMarker = new mapboxgl.Marker().setLngLat([longitude, latitude]).addTo(newMap);
     setMap(newMap);
     setMarker(newMarker);
+  
     return () => {
       if (map) {
         map.remove();
       }
+      
     };
   }, [latitude, longitude, zoom]);
 
