@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from 'cors';
 import yelp from 'yelp-fusion';
+import { error } from "console";
 dotenv.config();
 const port = 3001;
 const apiKey = process.env.YELP_API_TOKEN;
@@ -25,13 +26,17 @@ app.post('/api', (req, res) => {
   })
     .then(response => {
       const items = response.jsonBody.businesses
-      const randomBusiness = items[Math.floor(Math.random() * items.length)]
-      console.log(JSON.stringify(randomBusiness))
-      res.send(JSON.stringify(randomBusiness))
+      if (items.length === 0) {
+        res.status(404).send("No restauraunts found")
+      } else {
+        const randomBusiness = items[Math.floor(Math.random() * items.length)]
+        console.log(JSON.stringify(randomBusiness))
+        res.send(JSON.stringify(randomBusiness))
+      }
     })
     .catch(e => {
-      console.log(e);
-      res.status(500).send('Error occurred while fetching data from Yelp API');
+      console.log(e)
+      res.status(500).send('Internal Server Error!')
     });
 });
 

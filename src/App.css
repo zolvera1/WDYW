@@ -1,7 +1,6 @@
-
 .photo-container {
   width: 100%;
-  padding-top: 75%; /* 4:3 aspect ratio (adjust as needed) */
+  padding-top: 75%;
   position: relative;
   overflow: hidden;
 }
@@ -16,7 +15,7 @@
 
 .map-container {
   width: 100%;
-  padding-top: 75%; /* 4:3 aspect ratio (adjust as needed) */
+  padding-top: 75%;
   position: relative;
 }
 
@@ -32,3 +31,19 @@
   margin: 12px;
   border-radius: 4px;
   }
+body, #wdyw-form  {
+  background-color: #F1FAEE;
+}
+section{
+ color: #e63946
+}
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  align-items: center;
+  align-content: center;
+}
+.hero-content {
+
+}
