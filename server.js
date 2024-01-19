@@ -12,6 +12,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 app.post('/api', (req, res) => {
   const { state, city, address, radius, priceRange } = req.body;
   console.log(state, city, address, radius, priceRange)
