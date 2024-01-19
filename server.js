@@ -3,11 +3,15 @@ import dotenv from "dotenv";
 import cors from 'cors';
 import yelp from 'yelp-fusion';
 import path from 'path'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
 dotenv.config();
 const port = 3002 ;
 const apiKey = process.env.YELP_API_TOKEN;
 const client = yelp.client(apiKey);
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const app = express();
 app.use(express.json());
 app.use(cors());
