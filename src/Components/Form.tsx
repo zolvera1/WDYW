@@ -50,7 +50,7 @@ const Form = ({ onFormSubmit }: FormProps) => {
 
   const onSubmit = async (formData: IFormData) => {
     try {
-      const { data} = await axios.post<IYelpBusiness>('https://wdyw-aa2c29d3b4c5.herokuapp.com/api',  formData, { headers: headers });
+      const { data} = await axios.post<IYelpBusiness>('https://peppy-yeot-62e11d.netlify.app/',  formData, { headers: headers });
       onFormSubmit(data, null);
 
     }
