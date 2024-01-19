@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
+require('dotenv')
 
 type MapHookReturn = {
   mapContainerRef: React.RefObject<HTMLDivElement>;
@@ -13,7 +14,8 @@ const useMap = (latitude: number, longitude: number, zoom: number): MapHookRetur
 
   useEffect(() => {
     const newMap = new mapboxgl.Map({
-      accessToken: import.meta.env.VITE_MAPBOX_TOKEN,
+      
+      accessToken: process.env.VITE_MAPBOX_TOKEN,
       container: mapContainerRef.current as HTMLDivElement,
       style: 'mapbox://styles/mapbox/streets-v12',
       center: [longitude, latitude],
