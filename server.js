@@ -4,7 +4,7 @@ import cors from 'cors';
 import yelp from 'yelp-fusion';
 import { error } from "console";
 dotenv.config();
-const port = 3001;
+const port = 3002 ;
 const apiKey = process.env.YELP_API_TOKEN;
 const client = yelp.client(apiKey);
 
@@ -40,6 +40,6 @@ app.post('/api', (req, res) => {
     });
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`listening on port ${port}`);
 });
