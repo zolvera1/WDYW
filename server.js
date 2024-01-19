@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from 'cors';
 import yelp from 'yelp-fusion';
-import { error } from "console";
+import path from 'path'
 dotenv.config();
 const port = 3002 ;
 const apiKey = process.env.YELP_API_TOKEN;
