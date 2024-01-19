@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-require('dotenv')
 
 type MapHookReturn = {
   mapContainerRef: React.RefObject<HTMLDivElement>;
