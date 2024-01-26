@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Paper, Grid, Box } from '@mui/material';
-import styled from 'styled-components';
+
 import Map from './Map';
 
 type Props = {

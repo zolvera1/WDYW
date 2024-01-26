@@ -50,7 +50,7 @@ const Form = ({ onFormSubmit }: FormProps) => {
 
   const onSubmit = async (formData: IFormData) => {
     try {
-      const { data} = await axios.post<IYelpBusiness>('https://peppy-yeot-62e11d.netlify.app/api',  formData, { headers: headers });
+      const { data} = await axios.post<IYelpBusiness>('/.netlify/functions/api',  formData, { headers: headers });
       onFormSubmit(data, null);
 
     }
