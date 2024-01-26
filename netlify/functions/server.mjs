@@ -45,6 +45,10 @@ exports.handler = async (event, context) => {
       console.log(JSON.stringify(randomBusiness));
       return {
         statusCode: 200,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(randomBusiness)
       };
     }
