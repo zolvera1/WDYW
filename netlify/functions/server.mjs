@@ -10,7 +10,7 @@ dotenv.config();
 const port = 3002 ;
 const apiKey = process.env.YELP_API_TOKEN;
 const client = yelp.client(apiKey);
-const __filename = fileURLToPath(import.meta.url);
+const __filename = __filename;
 const __dirname = dirname(__filename);
 const app = express();
 app.use(express.json());
